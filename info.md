@@ -13,7 +13,7 @@ Creds: cobbler:cobbler
 Address: 10.0.201.1  
 SSH Creds: controller:whytryuser  
 Hostname: 240-AF03-17  
-Gateway: 10.0.110.1 
+Gateway: 10.0.110.1  
 MAC: D0:50:99:24:72:57  
 
 - PfSense  
