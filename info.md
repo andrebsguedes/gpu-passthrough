@@ -11,7 +11,7 @@ Creds: cobbler:cobbler
 
 - ASRock  
 Address: 10.0.201.1  
-SSH Creds: controller:whytryuser, root:whytryroot
+SSH Creds: controller:whytryuser, root:whytryroot  
 Hostname: 240-AF03-17  
 Gateway: 10.0.110.1  
 MAC: D0:50:99:24:72:57  
