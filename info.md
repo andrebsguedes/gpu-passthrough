@@ -23,3 +23,10 @@ Creds: admin:pfsense
 Tested Table
 =======
 https://docs.google.com/spreadsheets/d/1LnGpTrXalwGVNy0PWJDURhyxa3sgqkGXmvNCIvIMenk/edit#gid=0
+
+Final Report
+=======
+Final Project Report Guidelines: https://ipro.iit.edu/wp-content/uploads/ipro-final-report-guidelines.pdf
+Evaluation Rubric for the Final Project Report: https://ipro.iit.edu/wp-content/uploads/Rubric-for-IPRO-Final-Project-Report.pdf
+Sample Final Project Report: https://ipro.iit.edu/wp-content/uploads/Sample-Final-Report.pdf
+
