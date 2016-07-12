@@ -1,0 +1,35 @@
+<!doctype html>
+{% extends "bootstrap/base.html" %}
+{% block scripts %}
+{{super()}}
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+<script>
+function verify(){
+    $.getJSON($SCRIPT_ROOT + '/verify/{{folder_id}}', {}, 
+        function(data) {
+            if(data.valid == true){
+                $("#download").show();
+            } else {
+                $("#download").hide();
+                setTimeout(function(){verify();}, 1000);
+            }
+            var loglist = data.log
+            $("#result").html(loglist.join('<br>'));
+    });
+}
+
+setTimeout(function(){
+    verify();
+}, 1000);
+</script>
+{% endblock %}
+
+{% block content %}
+<div id=download hidden>
+    <a href="{{ url_for('download', folder=folder_id)}}">Download</a>
+</div>
+<span id=result>
+</span>
+{% endblock %}
