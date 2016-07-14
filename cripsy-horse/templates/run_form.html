@@ -1,15 +1,21 @@
 <!doctype html>
 {% extends "bootstrap/base.html" %}
 {% block content %}
-<div class="container-fluid text-center">
-<form role=form class="form-horizontal col-md-12" method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
-        <div class=form-group>
-        <input type=file name=source>
-        <input type=file name=makefile>
-        <input type=file name=datafile>
-        <input type=text name=args>
-        </div>
-        <input type=submit name=Ok>
+<div class="container">
+<span class="col-md-3"></span>
+<form class="form-signin col-md-6" method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
+        <h2 class="form-signin-heading text-center">Upload Your Code</h2>
+        <label class="control-label">Code: </label>
+        <input type=file class="form-control" name=source>
+        <label class="control-label">Makefile: </label>
+        <input type=file name=makefile class="form-control">
+        <label class="control-label">Data: </label>
+        <input type=file multiple name=datafile[] class="form-control">
+        <br>
+        <input type=text id="arg" name=args class="form-control" placeholder="Command Arguments">
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type=submit>Submit Files</button>
         </form>
+<span class="col-md-3"></span>
 </div>
 {% endblock %}

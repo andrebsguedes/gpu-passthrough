@@ -14,11 +14,6 @@ def runnable(directory, args):
     compiler = subprocess.Popen(['make'], cwd=directory, stdout=log, stderr=log)
     compiler.wait()
     run = None
-    #for fn in os.listdir(directory):
-    #    filename = os.path.join(directory, fn)
-    #    print("{}".format(filename))
-    #    if bool(os.stat(filename).st_mode & stat.S_IXUSR):
-    #       run = filename
 
     filenames = [os.path.join(directory, fn) for fn in os.listdir(directory)]
 
@@ -45,8 +40,6 @@ def runnable(directory, args):
 
 @app.route('/')
 def run_form():
-    #thread = Thread(target=runnable, args=('/tmp/tmpcqowbde_/', '-o test',))
-    #thread.start()
     return render_template('run_form.html')
 
 
@@ -55,33 +48,38 @@ def upload():
     if request.method == 'POST' and 'source' in request.files:
         source = request.files['source']
         makefile = request.files['makefile']
-        datafile = request.files['datafile']
+        datafiles = request.files.getlist("datafile[]")
         args = request.form['args']
         directory = tempfile.mkdtemp()
         source.save(os.path.join(directory , source.filename))
         makefile.save(os.path.join(directory , makefile.filename))
-        datafile.save(os.path.join(directory , datafile.filename))
+
+        for datafile in datafiles:
+            datafile.save(os.path.join(directory , datafile.filename))
+
         folder_id = directory.replace("/tmp/", "")
         thread = Thread(target=runnable, args=(directory,args,))
         threads[folder_id] = thread
         thread.start() 
     return redirect(url_for('result', folder_id=folder_id))
 
+@app.route('/js/<path:path>')
+def send_js(path):
+    return send_from_directory('static/js', path)
 
-
-#@app.route('/cancel/<folder_id>')
-#def cancel(folder_id=''):
-#    thread = threads[folder_id]
+@app.route('/css/<path:path>')
+def send_css(path):
+    return send_from_directory('static/css', path)
 
 @app.route('/result/<folder_id>')
 def result(folder_id=''): 
-    return render_template('result.html', folder_id=folder_id)
+    return render_template('results.html', folder_id=folder_id)
 
 
 @app.route('/verify/<folder_id>')
 def verify(folder_id=''):
     logfile = open(os.path.join('/tmp/'+folder_id, 'log.txt'), 'r')
-    log_output = logfile.readlines()
+    log_output = logfile.read()
     logfile.close()
     if os.path.isfile(os.path.join('/tmp/'+folder_id, 'output.zip')):
         return jsonify(valid=True, log=log_output)

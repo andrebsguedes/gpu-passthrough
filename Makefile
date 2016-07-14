@@ -1,2 +1,2 @@
 all:
-	g++ -std=c++11 source.cpp -o run
+	g++ -std=c++14 source.cpp -o run
