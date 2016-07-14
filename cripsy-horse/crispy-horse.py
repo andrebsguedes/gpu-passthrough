@@ -55,7 +55,8 @@ def upload():
         makefile.save(os.path.join(directory , makefile.filename))
 
         for datafile in datafiles:
-            datafile.save(os.path.join(directory , datafile.filename))
+            if datafile.filename != "":
+                datafile.save(os.path.join(directory , datafile.filename))
 
         folder_id = directory.replace("/tmp/", "")
         thread = Thread(target=runnable, args=(directory,args,))
@@ -90,5 +91,5 @@ def verify(folder_id=''):
 def download(folder=''):
     return send_from_directory(directory='/tmp/'+folder, filename='output.zip')
 
-if __name__ == "__main__":
-    app.run()
+#if __name__ == "__main__":
+#    app.run()
