@@ -76,6 +76,13 @@ def send_css(path):
 def result(folder_id=''): 
     return render_template('results.html', folder_id=folder_id)
 
+@app.route('/video/<path:path>')
+def video(path):
+    return render_template('video.html', path=path)
+
+#@app.route('/video/Nbody_Bench.mp4')
+#def videofile():
+#     return send_from_directory('static','Nbody_Bench.mp4')
 
 @app.route('/verify/<folder_id>')
 def verify(folder_id=''):
